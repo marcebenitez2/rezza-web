@@ -1,19 +1,53 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { IoCart } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FramerComponent } from "../framerMotion/FramerComponent";
+
 export const Navbar = () => {
   return (
-    <header className="h-20 w-full flex justify-between border-b items-center px-8 fixed top-0">
-      <span>Logo tienda</span>
+    <FramerComponent
+      style="h-20 w-full flex justify-between border-b items-center px-2 fixed top-0 lg:px-8"
+      animationInitial={{ y: -100 }}
+      animationAnimate={{ y: 0 }}
+    >
+      <span>Logo</span>
       <nav>
-        <ul className="flex">
-          <li>Inicio</li>
-          <li>Categorías</li>
-          <li>Ofertas</li>
-          <li>Contacto</li>
+        <ul className="hidden lg:flex gap-8">
+          <li>Home</li>
+          <li>About</li>
+          <li>Services</li>
+          <li>Contact</li>
         </ul>
       </nav>
-      <div>
-        <button>Buscar</button>
-        <button>Carrito</button>
+
+      <div className="flex gap-2 h-full items-center">
+        <IoCart className="text-4xl lg:text-5xl" />
+        <div className="flex lg:hidden">
+          <DropdownNav />
+        </div>
       </div>
-    </header>
+    </FramerComponent>
+  );
+};
+
+const DropdownNav = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <GiHamburgerMenu className="text-4xl" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>Home</DropdownMenuItem>
+        <DropdownMenuItem>About</DropdownMenuItem>
+        <DropdownMenuItem>Services</DropdownMenuItem>
+        <DropdownMenuItem>Contact</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
