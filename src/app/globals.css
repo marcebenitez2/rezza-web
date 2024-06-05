@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 29 44% 85%;
     --foreground: 240 10% 3.9%;
 
-    --card: 0 0% 100%;
+    --card: 29 44% 85%;
     --card-foreground: 240 10% 3.9%;
 
-    --popover: 0 0% 100%;
+    --popover: 29 44% 85%;
     --popover-foreground: 240 10% 3.9%;
 
     --primary: 240 5.9% 10%;
@@ -28,8 +28,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+    --border: 284 17% 47%;
+    --input: 284 17% 47%;
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
@@ -73,4 +73,19 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.category-circle {
+  width: 50%;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-circle:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }

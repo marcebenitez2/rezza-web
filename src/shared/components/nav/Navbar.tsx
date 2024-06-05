@@ -8,29 +8,32 @@ import {
 import { IoCart } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FramerComponent } from "../framerMotion/FramerComponent";
+import Image from "next/image";
 
 export const Navbar = () => {
   return (
     <FramerComponent
-      style="h-20 w-full flex justify-between border-b items-center px-2 fixed top-0 lg:px-8"
+      style="h-20 w-full flex border-b items-center px-2 lg:px-10 fixed top-0  justify-between fixed bg-[#e7d7c9]"
       animationInitial={{ y: -100 }}
       animationAnimate={{ y: 0 }}
     >
-      <span>Logo</span>
-      <nav>
-        <ul className="hidden lg:flex gap-8">
-          <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Contact</li>
-        </ul>
-      </nav>
+      <div className="lg:hidden flex-1">
+        <DropdownNav />
+      </div>
 
-      <div className="flex gap-2 h-full items-center">
+      <div className="w-32 flex-1 flex justify-center lg:justify-start">
+        <Image src={"/logo.png"} width={130} height={100} alt="Logo de rezza" />
+      </div>
+
+      <ul className="hidden lg:flex flex-1 gap-8 justify-center w-full">
+        <li className="text-center">Home</li>
+        <li className="text-center">About</li>
+        <li className="text-center">Services</li>
+        <li className="text-center">Contact</li>
+      </ul>
+
+      <div className="flex flex-1 justify-end">
         <IoCart className="text-4xl lg:text-5xl" />
-        <div className="flex lg:hidden">
-          <DropdownNav />
-        </div>
       </div>
     </FramerComponent>
   );
