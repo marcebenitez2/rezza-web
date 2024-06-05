@@ -1,4 +1,4 @@
-export interface Banners {
+export interface IBanners {
     data: BannersData[];
     meta: Meta;
 }

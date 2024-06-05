@@ -1,12 +1,18 @@
-import { Category } from "@/shared/types/categoriesQueryTypes";
+import { FramerComponent } from "@/shared/components/framerMotion/FramerComponent";
+import { ICategory } from "@/shared/types/categoriesQueryTypes";
+import { Link } from "next-view-transitions";
 
-export const CategoryCards = ({ categories }: { categories: Category[] }) => {
+export const CategoryCards = ({ categories }: { categories: ICategory[] }) => {
   if (!categories) {
     return null;
   }
 
   return (
-    <section className="w-full flex gap-4 justify-center">
+    <FramerComponent
+      style="w-full flex gap-4 justify-center"
+      animationInitial={{ opacity: 0 }}
+      animationAnimate={{ opacity: 1 }}
+    >
       {categories.map((element, index) => (
         <Card
           name={element.attributes.title}
@@ -14,16 +20,20 @@ export const CategoryCards = ({ categories }: { categories: Category[] }) => {
           key={index}
         />
       ))}
-    </section>
+    </FramerComponent>
   );
 };
 
 const Card = ({ name, image }: { name: string; image: string }) => {
   return (
-    <article
+    <Link
+      href={`/category/${name}`}
       className="category-circle shadow"
-      style={{ backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center"}}
-    >
-    </article>
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    ></Link>
   );
 };

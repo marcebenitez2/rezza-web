@@ -1,44 +1,24 @@
-import { BannersData } from "@/shared/types/bannersQueryTypes";
 import { SliderBanner } from "./components/SliderBanner";
 import { CategoryCards } from "./components/CategoriesCards";
 import { FeaturedProducts } from "./components/FeaturedProducts";
 import { BestSellingProducts } from "./components/BestSellingProducts";
 import { getAllBanners } from "@/services/strapi/querys/bannersQuery";
 import { getAllCategories } from "@/services/strapi/querys/categoriesQuery";
+import { getAllProducts } from "@/services/strapi/querys/productsQuery";
 
 const loadHome = async () => {
   const banners = await getAllBanners();
 
   const categories = await getAllCategories();
 
-  return { banners, categories };
+  const products = await getAllProducts();
+
+  return { banners, categories, products };
 };
 
 const HomeModule = async () => {
-  const { banners, categories } = await loadHome();
+  const { banners, categories, products } = await loadHome();
 
-
-  const featuredProducts = [
-    { title: "Producto 1", image: "", price: "100" },
-    { title: "Producto 2", image: "", price: "200" },
-    { title: "Producto 3", image: "", price: "300" },
-    { title: "Producto 4", image: "", price: "400" },
-    { title: "Producto 5", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-  ];
-
-  const bestSellingProducts = [
-    { title: "Producto 1", image: "", price: "100" },
-    { title: "Producto 2", image: "", price: "200" },
-    { title: "Producto 3", image: "", price: "300" },
-    { title: "Producto 4", image: "", price: "400" },
-    { title: "Producto 5", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-    { title: "Producto 6", image: "", price: "400" },
-  ];
 
   return (
     <main className="w-full h-full">
@@ -49,10 +29,10 @@ const HomeModule = async () => {
         <CategoryCards categories={categories} />
 
         {/* Aca iria componente de productos destacados */}
-        <FeaturedProducts featuredProducts={featuredProducts} />
+        <FeaturedProducts featuredProducts={products} />
 
         {/* Aca iria componente de productos mas vendidos */}
-        <BestSellingProducts products={bestSellingProducts} />
+        <BestSellingProducts products={products} />
       </div>
     </main>
   );

@@ -13,7 +13,7 @@ import Image from "next/image";
 export const Navbar = () => {
   return (
     <FramerComponent
-      style="h-20 w-full flex border-b items-center px-2 lg:px-10 fixed top-0  justify-between fixed bg-[#e7d7c9]"
+      style="h-20 w-full flex items-center px-2 lg:px-10 fixed top-0  justify-between fixed bg-[#e7d7c9] z-50 shadow-md"
       animationInitial={{ y: -100 }}
       animationAnimate={{ y: 0 }}
     >
@@ -33,7 +33,7 @@ export const Navbar = () => {
       </ul>
 
       <div className="flex flex-1 justify-end">
-        <IoCart className="text-4xl lg:text-5xl" />
+        <IoCart className="text-4xl lg:text-5xl" color="#81638b" />
       </div>
     </FramerComponent>
   );
@@ -45,7 +45,7 @@ const DropdownNav = () => {
       <DropdownMenuTrigger>
         <GiHamburgerMenu className="text-4xl" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="border-none shadow">
         <DropdownMenuItem>Home</DropdownMenuItem>
         <DropdownMenuItem>About</DropdownMenuItem>
         <DropdownMenuItem>Services</DropdownMenuItem>

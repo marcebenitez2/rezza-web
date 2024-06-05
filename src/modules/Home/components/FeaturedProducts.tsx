@@ -1,18 +1,23 @@
+import { FramerComponent } from "@/shared/components/framerMotion/FramerComponent";
 import { SliderProductsComponent } from "@/shared/components/SliderProducts/SliderProductsComponent";
+import { IProducts } from "@/shared/types/productsQueryTypes";
 
 export const FeaturedProducts = ({
   featuredProducts,
 }: {
-  featuredProducts: IProductsQuery[];
+  featuredProducts: IProducts[];
 }) => {
   if (!featuredProducts) return null;
 
   return (
-    <section>
-      <h2 className="text-4xl text-[#81638b] font-semibold">
+    <FramerComponent
+      animationInitial={{ opacity: 0 }}
+      animationAnimate={{ opacity: 1 }}
+    >
+      <h2 className="text-4xl text-[#81638b] font-semibold mb-4">
         Productos destacados
       </h2>
       <SliderProductsComponent items={featuredProducts} />
-    </section>
+    </FramerComponent>
   );
 };
