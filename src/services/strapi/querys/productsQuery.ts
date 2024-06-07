@@ -10,11 +10,42 @@ const QUERY_WITH_IMAGES =
 const QUERY_WITH_CATEGORY = "&populate=category";
 
 export const getAllProducts = async () => {
-  const { data: dataReceived } = await strapiClient.get(
-    `${BASE_CONSTRUCTED_PRODUCTS_URL}${QUERY_WITH_IMAGES}${QUERY_WITH_CATEGORY}`
-  );
+  try {
+    const { data: dataReceived } = await strapiClient.get(
+      `${BASE_CONSTRUCTED_PRODUCTS_URL}${QUERY_WITH_IMAGES}${QUERY_WITH_CATEGORY}`
+    );
 
-  const { data: productsData } = dataReceived;
+    if (!dataReceived || !dataReceived.data) {
+      throw new Error("Invalid response format");
+    }
 
-  return productsData;
+    const { data: productsData } = dataReceived;
+
+    return productsData;
+  } catch (error: any) {
+    console.error("Error fetching products:", error.message || error);
+    return [];
+  }
+};
+
+export const getProductsByCategory = async (category: string) => {
+  try {
+    const { data: dataReceived } = await strapiClient.get(
+      `${BASE_CONSTRUCTED_PRODUCTS_URL}${QUERY_WITH_IMAGES}${QUERY_WITH_CATEGORY}&category=${category}`
+    );
+
+    if (!dataReceived || !dataReceived.data) {
+      throw new Error("Invalid response format");
+    }
+
+    const { data: productsData } = dataReceived;
+
+    return productsData;
+  } catch (error: any) {
+    console.error(
+      "Error fetching products by category:",
+      error.message || error
+    );
+    return [];
+  }
 };

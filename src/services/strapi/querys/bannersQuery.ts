@@ -8,11 +8,20 @@ const QUERY_WITH_IMAGES =
   "?populate[banner][fields][0]=url&populate[responsive_banner][fields][0]=url";
 
 export const getAllBanners = async () => {
-  const { data: dataReceived } = await strapiClient.get(
-    `${BASE_CONSTRUCED_BANNERS_URL}${QUERY_WITH_IMAGES}`
-  );
+  try {
+    const { data: dataReceived } = await strapiClient.get(
+      `${BASE_CONSTRUCED_BANNERS_URL}${QUERY_WITH_IMAGES}`
+    );
 
-  const { data: bannersData } = dataReceived;
+    if (!dataReceived || !dataReceived.data) {
+      throw new Error("Invalid response format");
+    }
 
-  return bannersData;
+    const { data: bannersData } = dataReceived;
+
+    return bannersData;
+  } catch (error: any) {
+    console.error("Error fetching banners:", error.message || error);
+    return [];
+  }
 };

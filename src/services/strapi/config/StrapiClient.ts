@@ -15,8 +15,17 @@ strapiClient.interceptors.request.use(
     }
     return config;
   },
-  (e) => {
-    return Promise.reject(e);
+  (error) => {
+    console.error('Request error:', error);
+    return Promise.reject(error);
+  }
+);
+
+strapiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('Response error:', error.response || error.message || error);
+    return Promise.reject(error);
   }
 );
 
