@@ -16,7 +16,7 @@ export const BestSellingProducts = ({
       animationInitial={{ opacity: 0 }}
       animationAnimate={{ opacity: 1 }}
     >
-      <h2 className="text-4xl text-[#81638b] font-semibold mb-4">
+      <h2 className="text-2xl text-[#81638b] font-semibold mb-4  text-center xl:text-start lg:text-4xl">
         Productos mas vendidos
       </h2>
       <SliderProductsComponent items={products} />
