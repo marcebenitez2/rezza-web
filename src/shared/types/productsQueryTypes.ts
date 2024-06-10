@@ -1,9 +1,9 @@
 export interface IProducts {
   id:         number;
-  attributes: IProductAttributes;
+  attributes: IProductsAttributes;
 }
 
-export interface IProductAttributes {
+export interface IProductsAttributes {
   title:       string;
   createdAt:   Date;
   updatedAt:   Date;
@@ -12,24 +12,40 @@ export interface IProductAttributes {
   price:       number;
   offer:       null;
   slug:        string;
-  main_image:  Category;
-  images:      Category;
+  main_image:  MainImage;
+  images:      Images;
   category:    Category;
 }
 
 export interface Category {
-  data: Data | null;
+  data: Data;
 }
 
 export interface Data {
   id:         number;
-  attributes: DataAttributes;
+  attributes: PurpleAttributes;
 }
 
-export interface DataAttributes {
-  title?:       string;
-  createdAt?:   Date;
-  updatedAt?:   Date;
-  publishedAt?: Date;
-  url?:         string;
+export interface PurpleAttributes {
+  title:       string;
+  createdAt:   Date;
+  updatedAt:   Date;
+  publishedAt: Date;
+}
+
+export interface Images {
+  data: DAT[];
+}
+
+export interface DAT {
+  id:         number;
+  attributes: DatumAttributes;
+}
+
+export interface DatumAttributes {
+  url: string;
+}
+
+export interface MainImage {
+  data: DAT;
 }

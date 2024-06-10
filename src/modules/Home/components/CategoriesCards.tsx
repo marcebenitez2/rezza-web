@@ -30,10 +30,23 @@ const Card = ({ name, image }: { name: string; image: string }) => {
       href={`/category/${name}`}
       className="category-circle shadow"
       style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textDecoration: "none",
       }}
-    ></Link>
+    >
+      <div
+        className="image-container"
+        style={{
+          backgroundImage: `url(${image})`,
+        }}
+      ></div>
+      <span className="card-name">
+        {name.charAt(0).toUpperCase() + name.slice(1)}
+      </span>
+    </Link>
   );
 };
