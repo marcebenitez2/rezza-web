@@ -9,8 +9,6 @@ const loadModule = async (category: string) => {
 export const CategoryModule = async ({ params }: { params: string }) => {
   const { products } = await loadModule(params);
 
-  console.log(products);
-
   return (
     <main className="px-2 lg:px-36 flex flex-col mt-2 h-full lg:mt-4">
       <h3 className="text-2xl text-[#81638b] font-semibold mb-4 text-center lg:text-4xl">

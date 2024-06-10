@@ -74,7 +74,7 @@ export const getProductBySlug = async (slug: string) => {
 
     const { data: productsData } = dataReceived;
 
-    return productsData;
+    return productsData[0];
   } catch (error: any) {
     console.error("Error fetching product by slug:", error.message || error);
     return {};

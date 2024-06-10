@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,8 +10,14 @@ import { IoCart } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FramerComponent } from "../framerMotion/FramerComponent";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouterHelper } from "@/shared/hooks/useRouterHelper";
 
 export const Navbar = () => {
+  const { getHome } = useRouterHelper();
+
+  const home = getHome()?.path;
+
   return (
     <FramerComponent
       style="h-20 w-full flex items-center px-2 lg:px-10 fixed top-0  justify-between fixed bg-[#e7d7c9] z-50 shadow-md"
@@ -21,12 +28,14 @@ export const Navbar = () => {
         <DropdownNav />
       </div>
 
-      <div className="w-32 flex-1 flex justify-center lg:justify-start">
+      <Link
+        href={home || "/"}
+        className="w-32 flex-1 flex justify-center lg:justify-start"
+      >
         <Image src={"/logo.png"} width={130} height={100} alt="Logo de rezza" />
-      </div>
+      </Link>
 
       <ul className="hidden lg:flex flex-1 gap-8 justify-center w-full">
-        <li className="text-center">Home</li>
         <li className="text-center">About</li>
         <li className="text-center">Services</li>
         <li className="text-center">Contact</li>

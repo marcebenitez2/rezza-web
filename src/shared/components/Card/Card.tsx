@@ -4,15 +4,24 @@ import "./style.css";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouterHelper } from "@/shared/hooks/useRouterHelper";
 
 export const CardComponent = ({ data }: { data: IProducts }) => {
   const [count, setCount] = useState(1);
+  const { getCurrentRoute } = useRouterHelper();
+  const currentRoute = getCurrentRoute();
+
+  const generateLink = () => {
+    const category = data.attributes.category.data?.attributes.title;
+    const slug = data.attributes.slug;
+    return currentRoute?.name === "Home"
+      ? `category/${category}/${slug}`
+      : `${category}/${slug}`;
+  };
+
   return (
     <article className="h-full w-full flex flex-col justify-between">
-      <Link
-        href={`category/${data.attributes.category.data?.attributes.title}/${data.attributes.slug}`}
-        className="flex flex-col"
-      >
+      <Link href={generateLink()} className="flex flex-col">
         <div
           className="w-full h-64 lg:h-80 rounded"
           style={{
@@ -28,16 +37,10 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
       </Link>
       <div className="flex flex-col gap-2">
         <div className="flex justify-between">
-          <Button
-            disabled={count === 1}
-            className="w-full"
-            onClick={() => setCount(count - 1)}
-          >
+          <Button disabled={count === 1} className="w-full" onClick={() => setCount(count - 1)}>
             -
           </Button>
-          <span className="w-full flex items-center justify-center">
-            {count}
-          </span>
+          <span className="w-full flex items-center justify-center">{count}</span>
           <Button className="w-full" onClick={() => setCount(count + 1)}>
             +
           </Button>
