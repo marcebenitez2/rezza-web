@@ -6,12 +6,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { IoCart } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FramerComponent } from "../framerMotion/FramerComponent";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouterHelper } from "@/shared/hooks/useRouterHelper";
+import { CartIcon } from "./Cart";
 
 export const Navbar = () => {
   const { getHome } = useRouterHelper();
@@ -41,9 +41,7 @@ export const Navbar = () => {
         <li className="text-center">Contact</li>
       </ul>
 
-      <div className="flex flex-1 justify-end">
-        <IoCart className="text-4xl lg:text-5xl" color="#81638b" />
-      </div>
+      <CartIcon />
     </FramerComponent>
   );
 };

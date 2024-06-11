@@ -21,7 +21,7 @@ export const DescriptionProduct = ({ product }: { product: IProducts }) => {
       <p className="text-lg font-bold">${product.attributes.price}</p>
 
       {/* Botones */}
-      <AddCart />
+      <AddCart product={product} />
     </section>
   );
 };

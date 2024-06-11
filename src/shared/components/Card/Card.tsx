@@ -33,7 +33,7 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
           <span>${data.attributes.price}</span>
         </div>
       </Link>
-      <AddCart />
+      <AddCart product={data} />
     </article>
   );
 };

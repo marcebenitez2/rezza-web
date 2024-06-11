@@ -10,9 +10,6 @@ export const GridProducts = ({ products }: { products: IProducts[] }) => {
       {products.map((product, index) => {
         return <CardComponent key={index} data={product} />;
       })}
-      {products.map((product, index) => {
-        return <CardComponent key={index} data={product} />;
-      })}
     </div>
   );
 };
