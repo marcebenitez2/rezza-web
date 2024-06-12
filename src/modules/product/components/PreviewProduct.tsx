@@ -15,7 +15,7 @@ export const PreviewProduct = ({ product }: { product: IProducts }) => {
   );
 
   return (
-    <section className="flex flex-col-reverse w-full gap-4 md:flex-row justify-end pr-16">
+    <section className="flex flex-col-reverse w-full gap-4 md:flex-row justify-end lg:pr-16">
       <Slider images={images} setSelected={setImageSelected} />
 
       <div className="gap-2 hidden md:flex flex-col">

@@ -28,7 +28,7 @@ const Card = ({ name, image }: { name: string; image: string }) => {
   return (
     <Link
       href={`/category/${name}`}
-      className="category-circle shadow"
+      className="category-circle shadow-card"
       style={{
         position: "relative",
         overflow: "hidden",

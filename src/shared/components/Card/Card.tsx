@@ -28,7 +28,7 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
             backgroundPosition: "center",
           }}
         ></div>
-        <div>
+        <div className="h-20">
           <p>{data.attributes.title}</p>
           <span>${data.attributes.price}</span>
         </div>

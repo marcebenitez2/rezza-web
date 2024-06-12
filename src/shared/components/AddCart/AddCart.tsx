@@ -1,27 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { cartStore } from "@/shared/stores/CartStore";
 import { IProducts } from "@/shared/types/productsQueryTypes";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const AddCart = ({ product }: { product: IProducts }) => {
   const [count, setCount] = useState(1);
-  const { cart, addToCart } = cartStore();
+  const { addToCart, cart } = cartStore();
 
   const addCart = () => {
     const item = {
       title: product.attributes.title,
       cant: count,
-      precio: product.attributes.price,
+      price: product.attributes.price,
+      main_image: product.attributes.main_image.data.attributes.url,
     };
     addToCart(item);
   };
 
-  useEffect(() => {
-    console.log("Estado actual del carrito:", cart);
-  }, [cart]);
-
   return (
-    <div className="flex flex-col gap-2 max-w-64">
+    <div className="flex flex-col gap-2 max-w-64 m-auto w-full">
       <div className="flex justify-between">
         <Button
           disabled={count === 1}
@@ -30,7 +27,7 @@ export const AddCart = ({ product }: { product: IProducts }) => {
         >
           -
         </Button>
-        <span className="w-full flex items-center justify-center">{count}</span>
+        <span className="w-full flex items-center justify-center text-primary">{count}</span>
         <Button className="w-full" onClick={() => setCount(count + 1)}>
           +
         </Button>

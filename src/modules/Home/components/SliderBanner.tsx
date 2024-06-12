@@ -17,7 +17,23 @@ export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
       animationInitial={{ opacity: 0 }}
       animationAnimate={{ opacity: 1 }}
     >
-      <Carousel>
+      <div>
+        <Image
+          src={banners[0].attributes.banner.data[0].attributes.url}
+          alt={banners[0].attributes.alt}
+          width={1920}
+          height={300}
+          className="hidden lg:block object-cover"
+        />
+        <Image
+          src={banners[0].attributes.responsive_banner.data[0].attributes.url}
+          alt={banners[0].attributes.alt}
+          width={1920}
+          height={1000}
+          className="block lg:hidden object-cover"
+        />
+      </div>
+      <Carousel className={`${banners.length > 1 ? "" : "hidden"}`}>
         <CarouselContent className="h-full">
           {banners.map((banner) => {
             const imgUrl = banner.attributes.banner.data[0].attributes.url;
@@ -29,14 +45,14 @@ export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
               <CarouselItem key={banner.id}>
                 <Image
                   src={responsiveImgUrl}
-                  alt={banner.attributes.title}
+                  alt={banner.attributes.alt}
                   width={1920}
                   height={1000}
                   className="lg:hidden object-cover"
                 />
                 <Image
                   src={imgUrl}
-                  alt={banner.attributes.title}
+                  alt={banner.attributes.alt}
                   width={1920}
                   height={1000}
                   className="hidden lg:block"

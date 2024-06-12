@@ -1,9 +1,10 @@
 import { create } from "zustand";
 
-interface CartItem {
+export interface CartItem {
   title: string;
   cant: number;
-  precio: number;
+  price: number;
+  main_image: string;
 }
 
 interface ICart {
@@ -12,6 +13,9 @@ interface ICart {
   removeFromCart: (title: string) => void;
   clearToCart: () => void;
   getTotalItems: () => number;
+  increaseQuantity: (title: string) => void;
+  decreaseQuantity: (title: string) => void;
+  removeItem: (title: string) => void;
 }
 
 export const cartStore = create<ICart>((set, get) => ({
@@ -37,4 +41,17 @@ export const cartStore = create<ICart>((set, get) => ({
     const state = get();
     return state.cart.reduce((total, item) => total + item.cant, 0);
   },
+  increaseQuantity: (title) => set((state) => ({
+    cart: state.cart.map((item) =>
+      item.title === title ? { ...item, cant: item.cant + 1 } : item
+    ),
+  })),
+  decreaseQuantity: (title) => set((state) => ({
+    cart: state.cart.map((item) =>
+      item.title === title && item.cant > 1 ? { ...item, cant: item.cant - 1 } : item
+    ),
+  })),
+  removeItem: (title) => set((state) => ({
+    cart: state.cart.filter((item) => item.title !== title),
+  })),
 }));

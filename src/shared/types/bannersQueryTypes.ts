@@ -12,7 +12,7 @@ export interface BannersAttributes {
     createdAt:         Date;
     updatedAt:         Date;
     publishedAt:       Date;
-    title:             string;
+    alt:             string;
     banner:            Banner;
     responsive_banner: Banner;
 }
