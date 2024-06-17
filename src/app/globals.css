@@ -76,7 +76,7 @@
 }
 
 .category-circle {
-  width: 50%;
+  width: 100%;
   border-radius: 50%;
   background-color: white;
   display: flex;

@@ -9,7 +9,7 @@ export const CategoryCards = ({ categories }: { categories: ICategory[] }) => {
 
   return (
     <FramerComponent
-      style="w-full flex gap-4 justify-center"
+      style="w-full grid grid-cols-5 gap-1 lg:gap-4"
       animationInitial={{ opacity: 0 }}
       animationAnimate={{ opacity: 1 }}
     >

@@ -9,6 +9,7 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
   const { getCurrentRoute } = useRouterHelper();
   const currentRoute = getCurrentRoute();
 
+
   const generateLink = () => {
     const category = data.attributes.category.data?.attributes.title;
     const slug = data.attributes.slug;
