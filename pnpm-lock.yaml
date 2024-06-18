@@ -29,6 +29,9 @@ importers:
       clsx:
         specifier: ^2.1.0
         version: 2.1.0
+      emailjs-com:
+        specifier: ^3.2.0
+        version: 3.2.0
       embla-carousel-react:
         specifier: ^8.0.1
         version: 8.0.1(react@18.2.0)
@@ -53,6 +56,9 @@ importers:
       react-icons:
         specifier: ^5.0.1
         version: 5.2.1(react@18.2.0)
+      react-toastify:
+        specifier: ^10.0.5
+        version: 10.0.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       tailwind-merge:
         specifier: ^2.2.2
         version: 2.2.2
@@ -867,6 +873,11 @@ packages:
 
   electron-to-chromium@1.4.726:
     resolution: {integrity: sha512-xtjfBXn53RORwkbyKvDfTajtnTp0OJoPOIBzXvkNbb7+YYvCHJflba3L7Txyx/6Fov3ov2bGPr/n5MTixmPhdQ==}
+
+  emailjs-com@3.2.0:
+    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
+    engines: {node: '>=12.0.0'}
+    deprecated: The SDK name changed to @emailjs/browser
 
   embla-carousel-react@8.0.1:
     resolution: {integrity: sha512-cpFQ/HwCsjBjzpu9Z9IHmZ9DaCSf/wo4q+qUTcRW3SsNv+1Q8IY7Y8J2QIyTmz0vOWY7tliu3uE2gqRH7ZDwOQ==}
@@ -1715,6 +1726,12 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  react-toastify@10.0.5:
+    resolution: {integrity: sha512-mNKt2jBXJg4O7pSdbNUfDdTsK9FIdikfsIE/yUCxbAEXl4HMyJaivrVFcn3Elvt5xvCQYhUZm+hqTIu1UXM3Pw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
@@ -2847,6 +2864,8 @@ snapshots:
 
   electron-to-chromium@1.4.726: {}
 
+  emailjs-com@3.2.0: {}
+
   embla-carousel-react@8.0.1(react@18.2.0):
     dependencies:
       embla-carousel: 8.0.1
@@ -3818,6 +3837,12 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       '@types/react': 18.2.74
+
+  react-toastify@10.0.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      clsx: 2.1.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   react@18.2.0:
     dependencies:
