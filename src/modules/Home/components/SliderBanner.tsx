@@ -8,7 +8,8 @@ import { BannersData } from "@/shared/types/bannersQueryTypes";
 import Image from "next/image";
 
 export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
-  if (!banners) {
+
+  if (banners.length === 0) {
     return null;
   }
 

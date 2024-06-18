@@ -2,11 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CartItem } from "@/shared/stores/CartStore";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export const EndPurchase = ({ data }: { data: CartItem[] }) => {
   // Calcular el total a pagar
   const total = data.reduce((acc, item) => acc + item.cant * item.price, 0);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   // Construir el mensaje para WhatsApp
   const buildWhatsAppMessage = () => {
@@ -25,6 +28,14 @@ export const EndPurchase = ({ data }: { data: CartItem[] }) => {
   // Manejar el clic del botón
   const handleClick = () => {
     window.open(whatsappUrl, "_blank");
+  };
+
+  const handleSubmit = () => {
+    if (!email || !phone) {
+      return toast.error("Por favor completa todos los campos");
+    }
+
+    
   };
 
   return (
@@ -50,7 +61,9 @@ export const EndPurchase = ({ data }: { data: CartItem[] }) => {
           <Input type="email" placeholder="usuario@gmail.com" />
           <Label>Y tu numero</Label>
           <Input type="text" placeholder="3412597674" />
-          <Button className="w-full text-xl py-8">Enviar pedido</Button>
+          <Button className="w-full text-xl py-8" onClick={handleSubmit}>
+            Enviar pedido
+          </Button>
         </div>
       </div>
     </div>

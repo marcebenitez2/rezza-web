@@ -1,10 +1,15 @@
+import { useEffect, useState } from 'react';
 import { cartStore } from "@/shared/stores/CartStore";
 import { Link } from "next-view-transitions";
 import { IoCart } from "react-icons/io5";
 
 export const CartIcon = () => {
   const { getTotalItems } = cartStore();
-  const totalItems = getTotalItems();
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    setTotalItems(getTotalItems());
+  }, [getTotalItems]);
 
   return (
     <Link className="flex flex-1 justify-end" href={"/cart"}>

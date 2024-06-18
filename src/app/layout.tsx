@@ -3,7 +3,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/shared/components/nav/Navbar";
 import { ViewTransitions } from "next-view-transitions";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,8 +24,9 @@ export default function RootLayout({
             "min-h-screen bg-background font-sans antialiased h-screen pt-20"
           )}
         >
-            <Navbar />
-            {children}
+          <Navbar />
+          {children}
+          <ToastContainer />
         </body>
       </html>
     </ViewTransitions>
