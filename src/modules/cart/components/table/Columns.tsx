@@ -36,8 +36,8 @@ export const columns: ColumnDef<CartItem>[] = [
 
       return (
         <div className=" gap-1 flex">
-          <Button onClick={() => increaseQuantity(title)}>+</Button>
           <Button onClick={() => decreaseQuantity(title)}>-</Button>
+          <Button onClick={() => increaseQuantity(title)}>+</Button>
           <Button onClick={() => removeItem(title)}>
             <FaTrash />
           </Button>

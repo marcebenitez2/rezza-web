@@ -13,9 +13,16 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
   const generateLink = () => {
     const category = data.attributes.category.data?.attributes.title;
     const slug = data.attributes.slug;
-    return currentRoute?.name === "Home"
-      ? `category/${category}/${slug}`
-      : `${category}/${slug}`;
+
+    if (currentRoute?.name === "Home") {
+      return `category/${category}/${slug}`;
+    }
+
+    if (currentRoute?.name === "Product") {
+      return `${slug}`;
+    }
+
+    return "";
   };
 
   return (

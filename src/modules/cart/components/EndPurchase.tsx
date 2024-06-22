@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import sendEmail from "@/services/emailJS/sendEmail";
 import { CartItem } from "@/shared/stores/CartStore";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 export const EndPurchase = ({ data }: { data: CartItem[] }) => {
-  // Calcular el total a pagar
   const total = data.reduce((acc, item) => acc + item.cant * item.price, 0);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -30,12 +30,22 @@ export const EndPurchase = ({ data }: { data: CartItem[] }) => {
     window.open(whatsappUrl, "_blank");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!email || !phone) {
       return toast.error("Por favor completa todos los campos");
     }
 
-    
+    const itemsList = data
+      .map((item) => `${item.title} (Cantidad: ${item.cant})`)
+      .join(", ");
+    const cart = `Hola, quería realizar un pedido de: ${itemsList} con un total de: $${total}`;
+
+    try {
+      await sendEmail(email, phone, total, cart);
+      toast.success("Pedido enviado con éxito");
+    } catch (error) {
+      toast.error("Error al enviar el pedido");
+    }
   };
 
   return (
@@ -58,9 +68,19 @@ export const EndPurchase = ({ data }: { data: CartItem[] }) => {
         <span className="text-2xl font-semibold">O dejanos</span>
         <div className="w-full flex flex-col gap-2">
           <Label>Tu correo</Label>
-          <Input type="email" placeholder="usuario@gmail.com" />
+          <Input
+            type="email"
+            placeholder="usuario@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <Label>Y tu numero</Label>
-          <Input type="text" placeholder="3412597674" />
+          <Input
+            type="text"
+            placeholder="3412597674"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
           <Button className="w-full text-xl py-8" onClick={handleSubmit}>
             Enviar pedido
           </Button>

@@ -34,7 +34,7 @@ export const PreviewProduct = ({ product }: { product: IProducts }) => {
       <img
         src={imageSelected}
         alt={product.attributes.title}
-        className="h-96 object-contain md:w-96 md:object-cover md:h-auto"
+        className="h-96 object-contain md:w-96 md:object-cover md:h-[32rem]"
       />
     </section>
   );

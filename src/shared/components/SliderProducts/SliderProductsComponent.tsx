@@ -1,3 +1,4 @@
+"use client"
 import {
   Carousel,
   CarouselContent,
@@ -5,10 +6,20 @@ import {
 } from "@/components/ui/carousel";
 import { CardComponent } from "../Card/Card";
 import { IProducts } from "@/shared/types/productsQueryTypes";
+import Autoplay from "embla-carousel-autoplay"
+
 
 export const SliderProductsComponent = ({ items }: { items: IProducts[] }) => {
   return (
-    <Carousel className="w-full h-full">
+    <Carousel
+      className="w-full h-full"
+      opts={{ align: "start", loop: true }}
+      plugins={[
+        Autoplay({
+          delay: 2000,
+        }),
+      ]}
+    >
       <CarouselContent className="-ml-2 md:-ml-4 xl:-ml-8">
         {items.map((item, index) => (
           <CarouselItem
