@@ -21,7 +21,7 @@ export const Navbar = () => {
         href={home || "/"}
         className=" flex-1 flex"
       >
-        <Image src={"/logo.png"} width={128} height={100} alt="Logo de rezza" />
+        <Image src={"/logo.png"} width={100} height={90} alt="Logo de rezza" />
       </Link>
 
       <CartIcon />

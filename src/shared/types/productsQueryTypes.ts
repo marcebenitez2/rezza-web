@@ -1,20 +1,22 @@
 export interface IProducts {
-  id:         number;
+  id: number;
   attributes: IProductsAttributes;
 }
 
 export interface IProductsAttributes {
-  title:       string;
-  createdAt:   Date;
-  updatedAt:   Date;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
   publishedAt: Date;
   description: null;
-  price:       number;
-  offer:       null;
-  slug:        string;
-  main_image:  MainImage;
-  images:      Images;
-  category:    Category;
+  price: number;
+  offer: null;
+  slug: string;
+  featured_product: boolean;
+  best_selling: boolean;
+  main_image: MainImage;
+  images: Images;
+  category: Category;
 }
 
 export interface Category {
@@ -22,14 +24,14 @@ export interface Category {
 }
 
 export interface Data {
-  id:         number;
+  id: number;
   attributes: PurpleAttributes;
 }
 
 export interface PurpleAttributes {
-  title:       string;
-  createdAt:   Date;
-  updatedAt:   Date;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
   publishedAt: Date;
 }
 
@@ -38,7 +40,7 @@ export interface Images {
 }
 
 export interface DAT {
-  id:         number;
+  id: number;
   attributes: DatumAttributes;
 }
 
