@@ -8,9 +8,9 @@ export interface IProductsAttributes {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  description: null;
+  description: string;
   price: number;
-  offer: null;
+  offer: number;
   slug: string;
   featured_product: boolean;
   best_selling: boolean;
