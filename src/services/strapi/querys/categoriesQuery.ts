@@ -14,7 +14,7 @@ export const getAllCategories = async () => {
       `${BASE_CONSTRUCED_BANNERS_URL}${QUERY_WITH_IMAGES}`,
       {
         next: {
-          revalidate: 3600, // 1 hora de revalidación
+          revalidate: 10, // 1 hora de revalidación
         },
       }
     );

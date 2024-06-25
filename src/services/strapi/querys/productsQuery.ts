@@ -26,7 +26,7 @@ export const getAllProducts = async () => {
       `${BASE_CONSTRUCTED_PRODUCTS_URL}?${QUERY_WITH_IMAGES}&${QUERY_WITH_CATEGORY}`,
       {
         next: {
-          revalidate: 3600, // 1 hora de revalidación
+          revalidate: 10, // 1 hora de revalidación
         },
       }
     );
@@ -57,7 +57,7 @@ export const getProductsByCategory = async (category: string) => {
       {
         method: "GET",
         next: {
-          revalidate: 3600, // 1 hora de revalidación
+          revalidate: 10, // 1 hora de revalidación
         },
       }
     );
@@ -88,7 +88,7 @@ export const getProductBySlug = async (slug: string) => {
       {
         method: "GET",
         next: {
-          revalidate: 3600, // 1 hora de revalidación
+          revalidate: 10, // 1 hora de revalidación
         },
       }
     );
