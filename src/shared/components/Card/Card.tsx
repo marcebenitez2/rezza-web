@@ -21,6 +21,10 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
       return `${slug}`;
     }
 
+    if (currentRoute?.name === "Category") {
+      return `/category/${category}/${slug}`;
+    }
+
     return "";
   };
 
@@ -48,8 +52,6 @@ export const CardComponent = ({ data }: { data: IProducts }) => {
           ) : (
             <p>${data.attributes.price}</p>
           )}
-          
-
         </div>
       </Link>
       <AddCart product={data} />
