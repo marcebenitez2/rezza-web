@@ -18,23 +18,22 @@ export const PreviewProduct = ({ product }: { product: IProducts }) => {
     <section className="flex flex-col-reverse w-full gap-4 md:flex-row justify-end lg:pr-16">
       <Slider images={images} setSelected={setImageSelected} />
 
-      <div className="gap-2 hidden md:flex flex-col">
+      <div className="w-24  flex flex-col gap-2">
         {images.map((image, index) => {
           return (
             <img
               key={index}
               src={image.attributes.url}
-              className="w-20 h-20 rounded cursor-pointer"
+              className="rounded cursor-pointer max-h-24 h-full"
               onMouseEnter={() => setImageSelected(image.attributes.url)}
             />
           );
         })}
       </div>
-
       <img
         src={imageSelected}
         alt={product.attributes.title}
-        className="h-96 object-contain md:w-96 md:object-cover md:h-[32rem]"
+        className="h-96 object-contain md:w-3/4 md:object-cover md:h-[32rem]"
       />
     </section>
   );

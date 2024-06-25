@@ -14,7 +14,7 @@ const ProductModule = async ({
   return (
     <main className="flex flex-col py-8 items-center gap-10 px-2 lg:px-36">
       <BreadcrumbComponent />
-      <div className="flex md:flex-row flex-col gap-4 max-w-6xl">
+      <div className="flex md:flex-row flex-col gap-4  max-w-6xl w-full">
         <PreviewProduct product={product} />
         <DescriptionProduct product={product} />
       </div>
