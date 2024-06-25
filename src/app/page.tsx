@@ -21,8 +21,6 @@ const loadHome = async () => {
 export default async function Home() {
   const { banners, categories, products } = await loadHome();
 
-  console.log(products)
-
   return (
     <HomeModule banners={banners} categories={categories} products={products} />
   );

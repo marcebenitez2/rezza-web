@@ -17,14 +17,15 @@ export const Navbar = () => {
       animationInitial={{ y: -100 }}
       animationAnimate={{ y: 0 }}
     >
-      <Link
-        href={home || "/"}
-        className=" flex-1 flex"
-      >
+      <Link href={home || "/"} className=" flex-1 flex">
         <Image src={"/logo.png"} width={100} height={90} alt="Logo de rezza" />
       </Link>
-
-      <CartIcon />
+      <div className="flex gap-4">
+        <a href="https://www.instagram.com/by.rezza?igsh=MWIybWwzYzdiejk1cA==">
+          <img src="/instagramLogo.png" className="w-12" />
+        </a>
+        <CartIcon />
+      </div>
     </FramerComponent>
   );
 };
