@@ -20,9 +20,9 @@ export const Navbar = () => {
       <Link href={home || "/"} className=" flex-1 flex">
         <Image src={"/logo.png"} width={100} height={90} alt="Logo de rezza" />
       </Link>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center justify-center">
         <a href="https://www.instagram.com/by.rezza?igsh=MWIybWwzYzdiejk1cA==">
-          <img src="/instagramLogo.png" className="w-12" />
+          <img src="/instagramLogo.png" className="w-8 lg:w-12" />
         </a>
         <CartIcon />
       </div>
