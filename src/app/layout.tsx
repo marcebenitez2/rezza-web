@@ -22,10 +22,9 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased h-screen pt-20"
+            "min-h-screen bg-background font-sans antialiased"
           )}
         >
-          <Navbar />
           {children}
           <ToastContainer />
         </body>
