@@ -2,26 +2,36 @@ import ProductModule from "@/modules/product";
 import {
   getProductBySlug,
   getProductsByCategory,
-} from "@/services/strapi/querys/productsQuery";
+} from "@/services/firebase/firestore/firestore";
 import { IProducts } from "@/shared/types/productsQueryTypes";
 
 const loadModule = async (product: string) => {
+  const productData = (await getProductBySlug(product)) as IProducts;
 
-  const productData = await getProductBySlug(product);
+  const category = productData?.category;
 
-  const { title } = productData.attributes.category.data.attributes;
-
-  const productsCategory = await getProductsByCategory(title);
+  const productsCategory = (await getProductsByCategory(
+    category
+  )) as IProducts[];
 
   return { productData, productsCategory };
 };
 
-export default async function Product({params}: {params: { product: string }}) {
+export default async function Product({
+  params,
+}: {
+  params: { product: string };
+}) {
   const { productData, productsCategory } = await loadModule(params.product);
 
   const filteredProductsCategory = productsCategory.filter(
     (item: IProducts) => item.id !== productData.id
   );
 
-  return <ProductModule product={productData} filteredProductsCategory={filteredProductsCategory}/>;
+  return (
+    <ProductModule
+      product={productData}
+      filteredProductsCategory={filteredProductsCategory}
+    />
+  );
 }

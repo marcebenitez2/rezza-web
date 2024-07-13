@@ -1,14 +1,15 @@
 import HomeModule from "@/modules/Home";
-import { getAllBanners } from "@/services/strapi/querys/bannersQuery";
-import { getAllCategories } from "@/services/strapi/querys/categoriesQuery";
-import { getAllProducts } from "@/services/strapi/querys/productsQuery";
+import { getCollection } from "@/services/firebase/firestore/firestore";
+import { IBanners } from "@/shared/types/bannersQueryTypes";
+import { ICategory } from "@/shared/types/categoriesQueryTypes";
+import { IProducts } from "@/shared/types/productsQueryTypes";
 
 const loadHome = async () => {
   try {
     const [banners, categories, products] = await Promise.all([
-      getAllBanners(),
-      getAllCategories(),
-      getAllProducts(),
+      getCollection("banners"),
+      getCollection("categories"),
+      getCollection("products"),
     ]);
 
     return { banners, categories, products };
@@ -22,6 +23,10 @@ export default async function Home() {
   const { banners, categories, products } = await loadHome();
 
   return (
-    <HomeModule banners={banners} categories={categories} products={products} />
+    <HomeModule
+      banners={banners as IBanners[]}
+      categories={categories as ICategory[]}
+      products={products as IProducts[]}
+    />
   );
 }

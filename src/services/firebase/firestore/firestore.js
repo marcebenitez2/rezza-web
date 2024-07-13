@@ -26,6 +26,20 @@ export async function getCollection(collectionName) {
   }
 }
 
+export async function getProductsByCategory(categoryName) {
+  try {
+    const querySnapshot = await getDocs(firestoreCollection(db, "products"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return data.filter((product) => product.category === categoryName);
+  } catch (error) {
+    console.error("Error getting collection: ", error);
+    return [];
+  }
+}
+
 export async function addDocument(collectionName, data) {
   if (collectionName === "products") {
     if (!data.main_image) {
@@ -139,11 +153,14 @@ export async function updateDocument(collectionName, id, data) {
     if (collectionName === "products") {
       const { main_image } = docSnap.data();
 
-      if (data.main_image && data.main_image.name !== main_image) {
+      console.log(docSnap.data());
+      console.log(data);
+
+      if (data.main_image !== main_image) {
         await deleteFile(main_image);
         const url = await uploadFile(
           data.main_image,
-          `images/${data.main_image.name}`
+          `images/${data.main_image}`
         );
         data.main_image = url;
       } else {
@@ -191,5 +208,19 @@ export async function updateDocument(collectionName, id, data) {
   } catch (error) {
     console.error("Error updating document: ", error);
     return false;
+  }
+}
+
+export async function getProductBySlug(slug) {
+  try {
+    const querySnapshot = await getDocs(firestoreCollection(db, "products"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return data.find((product) => product.slug === slug);
+  } catch (error) {
+    console.error("Error getting collection: ", error);
+    return [];
   }
 }

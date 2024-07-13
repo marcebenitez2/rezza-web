@@ -15,8 +15,8 @@ export const CategoryCards = ({ categories }: { categories: ICategory[] }) => {
     >
       {categories.map((element, index) => (
         <Card
-          name={element.attributes.title}
-          image={element.attributes.image.data[0].attributes.url}
+          name={element.title}
+          image={element.image}
           key={index}
         />
       ))}

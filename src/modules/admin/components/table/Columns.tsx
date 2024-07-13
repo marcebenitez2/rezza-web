@@ -60,7 +60,6 @@ export const columnsProducts: ColumnDef<IProducts>[] = [
     cell: ({ row }) => {
       return (
         <div className=" gap-1 flex">
-          <ProductDialog collectionName="products" product={row.original} />
           <DeleteDialog collectionName="products" id={row.original.id} />
         </div>
       );

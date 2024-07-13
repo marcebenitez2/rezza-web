@@ -1,5 +1,6 @@
 import { CategoryModule } from "@/modules/category";
-import { getProductsByCategory } from "@/services/strapi/querys/productsQuery";
+import { getProductsByCategory } from "@/services/firebase/firestore/firestore";
+import { IProducts } from "@/shared/types/productsQueryTypes";
 
 const loadModule = async (category: string) => {
   const products = await getProductsByCategory(category);
@@ -12,5 +13,10 @@ export default async function Category({
   params: { category: string };
 }) {
   const { products } = await loadModule(params.category);
-  return <CategoryModule products={products} category={params.category} />;
+  return (
+    <CategoryModule
+      products={products as IProducts[]}
+      category={params.category}
+    />
+  );
 }

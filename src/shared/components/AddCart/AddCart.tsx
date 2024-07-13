@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { cartStore } from "@/shared/stores/CartStore";
 import { IProducts } from "@/shared/types/productsQueryTypes";
@@ -10,10 +11,10 @@ export const AddCart = ({ product }: { product: IProducts }) => {
 
   const addCart = () => {
     const item = {
-      title: product.attributes.title,
+      title: product.title,
       cant: count,
-      price: product.attributes.price,
-      main_image: product.attributes.main_image.data.attributes.url,
+      price: product.price,
+      main_image: product.main_image,
     };
     addToCart(item);
 
