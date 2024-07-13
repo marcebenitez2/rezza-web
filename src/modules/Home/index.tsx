@@ -2,17 +2,17 @@ import { SliderBanner } from "./components/SliderBanner";
 import { CategoryCards } from "./components/CategoriesCards";
 import { FeaturedProducts } from "./components/FeaturedProducts";
 import { BestSellingProducts } from "./components/BestSellingProducts";
-import { BannersData } from "@/shared/types/bannersQueryTypes";
 import { ICategory } from "@/shared/types/categoriesQueryTypes";
 import { IProducts } from "@/shared/types/productsQueryTypes";
 import { GridProducts } from "@/shared/components/GridProducts/GridProducts";
+import { IBanners } from "@/shared/types/bannersQueryTypes";
 
 const HomeModule = ({
   banners,
   categories,
   products,
 }: {
-  banners: BannersData[];
+  banners: IBanners[];
   categories: ICategory[];
   products: IProducts[];
 }) => {
@@ -21,12 +21,12 @@ const HomeModule = ({
 
   // Filtrar los productos que tienen featured_product = true
   const featuredProducts = products.filter(
-    (product) => product.attributes.featured_product
+    (product) => product.featured_product
   );
 
   // Filtrar los productos que tienen best_selling = true
   const bestSellingProducts = products.filter(
-    (product) => product.attributes.best_selling
+    (product) => product.best_selling
   );
 
   // En caso que no haya productos featured, se muestran los primeros 8 productos
@@ -42,7 +42,7 @@ const HomeModule = ({
   // En caso que los productos featured sean menos de 8, se completar con los otros productos
   if (featuredProducts.length < 8) {
     const restProducts = products.filter(
-      (product) => !product.attributes.featured_product
+      (product) => !product.featured_product
     );
     featuredProducts.push(
       ...restProducts.slice(0, 8 - featuredProducts.length)
@@ -52,7 +52,7 @@ const HomeModule = ({
   // En caso que los productos best_selling sean menos de 8, se completar con los otros productos
   if (bestSellingProducts.length < 8) {
     const restProducts = products.filter(
-      (product) => !product.attributes.best_selling
+      (product) => !product.best_selling
     );
     bestSellingProducts.push(
       ...restProducts.slice(0, 8 - bestSellingProducts.length)

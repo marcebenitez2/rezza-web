@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouterHelper } from "@/shared/hooks/useRouterHelper";
 import { CartIcon } from "./Cart";
+import { FaUser } from "react-icons/fa";
+
 
 export const Navbar = () => {
   const { getHome } = useRouterHelper();
@@ -21,6 +23,9 @@ export const Navbar = () => {
         <Image src={"/logo.png"} width={100} height={90} alt="Logo de rezza" />
       </Link>
       <div className="flex gap-4 items-center justify-center">
+        <a href="/login">
+          <FaUser className="text-4xl text-zinc-500" />
+        </a>
         <a href="https://www.instagram.com/by.rezza?igsh=MWIybWwzYzdiejk1cA==">
           <img src="/instagramLogo.png" className="w-8 lg:w-12" />
         </a>

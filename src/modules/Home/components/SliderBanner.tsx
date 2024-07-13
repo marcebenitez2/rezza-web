@@ -4,10 +4,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { FramerComponent } from "@/shared/components/framerMotion/FramerComponent";
-import { BannersData } from "@/shared/types/bannersQueryTypes";
+import { IBanners } from "@/shared/types/bannersQueryTypes";
 import Image from "next/image";
 
-export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
+export const SliderBanner = ({ banners }: { banners: IBanners[] }) => {
 
   // En caso que no haya banners, no se muestra nada
 
@@ -24,15 +24,15 @@ export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
       >
         <div>
           <Image
-            src={banners[0].attributes.banner.data[0].attributes.url}
-            alt={banners[0].attributes.alt}
+            src={banners[0].banner}
+            alt={banners[0].alt}
             width={1920}
             height={300}
             className="hidden lg:block object-cover"
           />
           <Image
-            src={banners[0].attributes.responsive_banner.data[0].attributes.url}
-            alt={banners[0].attributes.alt}
+            src={banners[0].responsive_banner}
+            alt={banners[0].alt}
             width={1920}
             height={1000}
             className="block lg:hidden object-cover"
@@ -52,23 +52,23 @@ export const SliderBanner = ({ banners }: { banners: BannersData[] }) => {
       <Carousel className={`${banners.length > 1 ? "" : "hidden"}`}>
         <CarouselContent className="h-full">
           {banners.map((banner) => {
-            const imgUrl = banner.attributes.banner.data[0].attributes.url;
+            const imgUrl = banner.banner;
 
             const responsiveImgUrl =
-              banner.attributes.responsive_banner.data[0].attributes.url;
+              banner.responsive_banner;
 
             return (
               <CarouselItem key={banner.id}>
                 <Image
                   src={responsiveImgUrl}
-                  alt={banner.attributes.alt}
+                  alt={banner.alt}
                   width={1920}
                   height={1000}
                   className="lg:hidden object-cover"
                 />
                 <Image
                   src={imgUrl}
-                  alt={banner.attributes.alt}
+                  alt={banner.alt}
                   width={1920}
                   height={1000}
                   className="hidden lg:block"
