@@ -8,12 +8,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBwhPn86VYo0sh6kyJxO3SZqhDx7DmH5lM",
-  authDomain: "rezza-makeup.firebaseapp.com",
-  projectId: "rezza-makeup",
-  storageBucket: "rezza-makeup.appspot.com",
-  messagingSenderId: "1073261420406",
-  appId: "1:1073261420406:web:87fb1d7a3a37a83ef12457"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 
