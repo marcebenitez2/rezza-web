@@ -19,7 +19,7 @@ export const DeleteDialog = ({
   onSuccess,
 }: {
   collectionName: string;
-  id: string;
+  id?: string;
   onSuccess?: () => void;
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
