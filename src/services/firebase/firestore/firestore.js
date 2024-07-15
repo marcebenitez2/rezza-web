@@ -150,58 +150,6 @@ export async function updateDocument(collectionName, id, data) {
       return false;
     }
 
-    if (collectionName === "products") {
-      const { main_image } = docSnap.data();
-
-      console.log(docSnap.data());
-      console.log(data);
-
-      if (data.main_image !== main_image) {
-        await deleteFile(main_image);
-        const url = await uploadFile(
-          data.main_image,
-          `images/${data.main_image}`
-        );
-        data.main_image = url;
-      } else {
-        data.main_image = main_image;
-      }
-    } else if (collectionName === "categories") {
-      const { image } = docSnap.data();
-
-      if (data.image && data.image.name !== image) {
-        await deleteFile(image);
-        const url = await uploadFile(data.image, `images/${data.image.name}`);
-        data.image = url;
-      } else {
-        data.image = image;
-      }
-    } else if (collectionName === "banners") {
-      const { responsive_banner, banner } = docSnap.data();
-
-      if (
-        data.responsive_banner &&
-        data.responsive_banner.name !== responsive_banner
-      ) {
-        await deleteFile(responsive_banner);
-        console.log(data.responsive_banner);
-        const url = await uploadFile(
-          data.responsive_banner,
-          `images/${data.responsive_banner.name}`
-        );
-        data.responsive_banner = url;
-      } else {
-        data.responsive_banner = responsive_banner;
-      }
-
-      if (data.banner && data.banner.name !== banner) {
-        await deleteFile(banner);
-        const url = await uploadFile(data.banner, `images/${data.banner.name}`);
-        data.banner = url;
-      } else {
-        data.banner = banner;
-      }
-    }
 
     await updateDoc(docRef, data);
     return true;

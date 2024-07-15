@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { DeleteDialog } from "../DeleteDialog";
 import { IProducts } from "@/shared/types/productsQueryTypes";
@@ -60,6 +59,7 @@ export const columnsProducts: ColumnDef<IProducts>[] = [
     cell: ({ row }) => {
       return (
         <div className=" gap-1 flex">
+          <ProductDialog collectionName="products" product={row.original} />
           <DeleteDialog collectionName="products" id={row.original.id} />
         </div>
       );

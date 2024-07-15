@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,8 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  addDocument,
+  updateDocument,
   getCollection,
+  addDocument,
 } from "@/services/firebase/firestore/firestore";
 import { useState, useEffect, useMemo } from "react";
 import {
@@ -22,10 +24,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ICategory } from "@/shared/types/categoriesQueryTypes";
 import ClipLoader from "react-spinners/ClipLoader";
+import { ICategory } from "@/shared/types/categoriesQueryTypes";
+import { IProducts } from "@/shared/types/productsQueryTypes";
+import { uploadFile } from "@/services/firebase/storage/storage";
 
-// Función para generar slug
+interface ProductDialogProps {
+  collectionName: string;
+  product?: IProducts;
+}
+
 const generateSlug = (title: string) => {
   return title
     .toLowerCase()
@@ -33,29 +41,29 @@ const generateSlug = (title: string) => {
     .replace(/[^\w-]+/g, "");
 };
 
-export const ProductDialog = ({
+export const ProductDialog: React.FC<ProductDialogProps> = ({
   collectionName,
-}: {
-  collectionName: string;
-  categories?: any[];
+  product,
 }) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [loading, setLoading] = useState(false);
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
 
-  const initialFormData = useMemo(
+  const initialFormData: IProducts = useMemo(
     () => ({
-      title: "",
-      description: "",
-      category: "",
-      price: "",
-      main_image: null,
-      offer: "",
-      best_selling: false,
-      featured_product: false,
-      slug: "",
+      title: product?.title || "",
+      description: product?.description || "",
+      category: product?.category || "",
+      price: product?.price || 0,
+      main_image: product?.main_image || "",
+      offer: product?.offer || 0,
+      best_selling: product?.best_selling || false,
+      featured_product: product?.featured_product || false,
+      slug: product?.slug || "",
     }),
-    []
+    [product]
   );
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,26 +85,28 @@ export const ProductDialog = ({
     fetchData();
   }, []);
 
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<IProducts>(initialFormData);
+
+  useEffect(() => {
+    setFormData(initialFormData);
+  }, [initialFormData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]:
-        type === "checkbox"
-          ? checked
-          : type === "file"
-          ? files && files[0]
-          : value,
-    });
+    if (type === "file") {
+      setNewImageFile(files ? files[0] : null);
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === "checkbox" ? checked : value,
+      });
 
-    // Generar slug cuando se cambia el título
-    if (name === "title") {
-      setFormData((prevData) => ({
-        ...prevData,
-        slug: generateSlug(value),
-      }));
+      if (name === "title") {
+        setFormData((prevData) => ({
+          ...prevData,
+          slug: generateSlug(value),
+        }));
+      }
     }
   };
 
@@ -111,12 +121,42 @@ export const ProductDialog = ({
     e.preventDefault();
     setLoading(true);
 
-    console.log("Form data:", formData);
-
     try {
-      await addDocument(collectionName, formData);
+      // Primero validamos si se trata de una carga o una actualizacion
+      if (product) {
+        // En caso que sea una actualizacion, cargamos la imagen nueva a storage
+
+        // Primero revisamos si se cambio la imagen
+        if (newImageFile) {
+          const urlImagenNueva = await uploadFile(
+            newImageFile,
+            `/images/${newImageFile?.name}`
+          );
+
+          // Actualizamos el documento
+          await updateDocument("products", product.id, {
+            ...formData,
+            main_image: urlImagenNueva,
+          });
+        } else {
+          await updateDocument("products", product.id, formData);
+        }
+
+      } else {
+        // En caso que sea una carga, cargamos la imagen a storage
+        const urlImagen = uploadFile(
+          newImageFile,
+          `/images/${newImageFile?.name}`
+        );
+
+        // Agregamos un nuevo documento
+        await addDocument("products", {
+          ...formData,
+          main_image: urlImagen,
+        });
+      }
     } catch (error) {
-      console.error("Error al agregar/editar el producto:", error);
+      console.error("Error updating document:", error);
     } finally {
       setLoading(false);
     }
@@ -125,8 +165,10 @@ export const ProductDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className={"absolute right-3  lg:right-60 top-24"}>
-          Agregar
+        <Button
+          className={`${product ? "" : "absolute right-3 lg:right-60 top-24"}`}
+        >
+          {product ? "Editar" : "Agregar"}
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -138,10 +180,13 @@ export const ProductDialog = ({
           <>
             <DialogHeader>
               <DialogTitle className="text-center">
-                {`Agregar documento en: ${collectionName}`}
+                {product
+                  ? `Editar producto en: ${collectionName}`
+                  : `Agregar documento en: ${collectionName}`}
               </DialogTitle>
               <DialogDescription className="text-center">
-                Debe recargar la página para ver los cambios una vez agregado
+                Debe recargar la página para ver los cambios una vez{" "}
+                {product ? "editado" : "agregado"}
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit}>
@@ -156,15 +201,14 @@ export const ProductDialog = ({
               <Label>
                 Categoria
                 <Select
-                  onValueChange={(categoryTitle: string) =>
-                    handleCategoryChange(categoryTitle)
-                  }
+                  onValueChange={handleCategoryChange}
+                  value={formData.category}
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Categoria" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categories?.map((category) => (
+                    {categories.map((category) => (
                       <SelectItem key={category.id} value={category.title}>
                         {category.title}
                       </SelectItem>
@@ -230,7 +274,7 @@ export const ProductDialog = ({
               </div>
 
               <Button className="w-full mt-4" type="submit">
-                Agregar
+                {product ? "Guardar cambios" : "Agregar"}
               </Button>
             </form>
           </>

@@ -2,7 +2,7 @@ export interface IProducts {
   best_selling: boolean;
   description: string;
   featured_product: boolean;
-  id: string;
+  id?: string;
   main_image: string;
   offer: number;
   price: number;
